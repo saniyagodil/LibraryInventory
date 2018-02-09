@@ -29,12 +29,12 @@
                         <a class="nav-link" href="/all">All Books</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/returned">All Available Books</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/returned">All Available Books<span class="sr-only">(current)</span></a>
                     </li>
 
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/borrowed">All Borrowed Books<span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/borrowed">All Borrowed Books</a>
                     </li>
 
                     <li class="nav-item">
@@ -50,39 +50,16 @@
             </div>
         </nav>
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Author</th>
-                <th scope="col">Year Published</th>
-                <th scope="col">ISBN</th>
-                <th scope="col">Image</th>
-                <th scope="col">Available?</th>
-                <th scope="col">Number of Times Checked Out</th>
-                <th scope="col">Last Time Borrowed</th>
-                <th scope="col">Actions Available</th>
+        <br />
+        <tr th:each="historyRecord : ${history}">
+            <td th:text="${historyRecord.record}"></td><br /><br />
 
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="book : ${Stacks}" th:if="${book.available == 'Not'}">
 
-                <td th:text="${book.title}"></td>
-                <td th:text="${book.author}"></td>
-                <td th:text="${book.yearPub}"></td>
-                <td th:text="${book.isbnNum}"></td>
-                <td><img th:src='${book.image}' width="150" height="150"/></td>
-                <td th:text="${book.available}"></td>
-                <td th:text="${book.numTimes}"></td>
-                <td th:text="${book.lastBorrow}"></td>
-                <td><a th:href="@{/return/{id} (id=${book.id})}">Return</a></td>
+        </tr>
 
 
 
-            </tr>
-            </tbody>
-        </table>
+
     </div>
 </div>
 

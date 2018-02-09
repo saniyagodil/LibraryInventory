@@ -17,12 +17,13 @@ public class HomeController {
     Stacks stacks;
 
     @Autowired
-    Stacks rstacks;
+    HistoryRepository historyRepository;
 
-    @Autowired
-    Stacks bstacks;
 
     public String Message = "";
+
+
+
     @RequestMapping("/")
     public String mainPage(){
         return "Main";
@@ -55,6 +56,11 @@ public class HomeController {
         return "redirect:/all";
     }
 
+    @RequestMapping("/history")
+    public String allHistory(Model model){
+        model.addAttribute("history", historyRepository.findAll());
+        return "History";
+    }
 
     @RequestMapping("/return/{id}")
     public String returnBook(@PathVariable("id") long id, Model model){
@@ -69,18 +75,20 @@ public class HomeController {
     @RequestMapping("/borrow/{id}")
     public String borrowBook(@PathVariable("id") long id, Model model){
         Book book = stacks.findOne(id);
+
         book.setAvailable("Not");
         book.setNumTimes(book.getNumTimes() +1);
         String temp = (LocalDateTime.now()).toString();
-        book.setLastBorrow(temp.substring(5, 7) + "/" + temp.substring(8, 10) + "/" + temp.substring(0, 4) + " " + temp.substring(12, 19));
+        String temp2 = temp.substring(5, 7) + "/" + temp.substring(8, 10) + "/" + temp.substring(0, 4) + " " + temp.substring(11, 19);
+        book.setLastBorrow(temp2);
+
         Message = "Successfully Borrowed Book!";
         stacks.save(book);
         model.addAttribute("Stacks", stacks.findAll());
 
+        historyRepository.save(new HistoryRecord(book.getTitle() + " " + temp2));
         return "redirect:/all";
     }
-
-
 
     @RequestMapping("/borrowed")
     public String allBorrowed(Model model){
@@ -93,5 +101,4 @@ public class HomeController {
         model.addAttribute("Stacks", stacks.findAll());
         return "Returned";
     }
-
 }
