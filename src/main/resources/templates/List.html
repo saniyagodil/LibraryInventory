@@ -50,6 +50,9 @@
             </div>
         </nav>
 
+        <br />
+        <p th:text="${Message}">!</p>
+
         <table class="table">
             <thead>
             <tr>
@@ -60,6 +63,7 @@
                 <th scope="col">Image</th>
                 <th scope="col">Available?</th>
                 <th scope="col">Number of Times Checked Out</th>
+                <th scope="col">Last Time Borrowed</th>
 
 
             </tr>
@@ -73,6 +77,7 @@
                 <td><img th:src='${book.image}' width="150" height="150"/></td>
                 <td th:text="${book.available}"></td>
                 <td th:text="${book.numTimes}"></td>
+                <td th:text="${book.lastBorrow}"></td>
 
 
             </tr>

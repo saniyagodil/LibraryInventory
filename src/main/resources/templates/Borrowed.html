@@ -58,6 +58,7 @@
                 <th scope="col">Image</th>
                 <th scope="col">Available?</th>
                 <th scope="col">Number of Times Checked Out</th>
+                <th scope="col">Last Time Borrowed</th>
                 <th scope="col">Actions Available</th>
 
             </tr>
@@ -72,6 +73,7 @@
                 <td><img th:src='${book.image}' width="150" height="150"/></td>
                 <td th:text="${book.available}"></td>
                 <td th:text="${book.numTimes}"></td>
+                <td th:text="${book.lastBorrow}"></td>
                 <td><a th:href="@{/return/{id} (id=${book.id})}">Return</a></td>
 
 

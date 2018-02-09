@@ -35,6 +35,10 @@ public class Book {
 
     private int numTimes =0;
 
+    private String lastBorrow = "N/A";
+
+
+
     public Book(){
 
     }
@@ -51,8 +55,6 @@ public class Book {
         this.yearPub = y;
         this.isbnNum = i;
         this.image = im;
-
-
 
     }
 
@@ -120,4 +122,14 @@ public class Book {
     public void setNumTimes(int numTimes) {
         this.numTimes = numTimes;
     }
+
+    public String getLastBorrow() {
+        return lastBorrow;
+    }
+
+    public void setLastBorrow(String lastBorrow) {
+        this.lastBorrow = lastBorrow;
+    }
+
+
 }
